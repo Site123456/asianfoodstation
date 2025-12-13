@@ -41,13 +41,13 @@
   /* MENU */
   .menu { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(2, 1fr); }
   .menu img { width: 100%; display: block; cursor: pointer; }
-  @media (max-width: 768px) { .menu { grid-template-columns: 1fr; } }
 
   /* LIGHTBOX */
   .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 999; }
   .lightbox.active { display: flex; }
   .lightbox img { max-width: 95vw; max-height: 90vh; border-radius: 0.75rem; }
   .lightbox span { position: absolute; top: 1rem; right: 1.25rem; font-size: 2rem; color: #fff; cursor: pointer; }
+  @media (max-width: 768px) { .menu { grid-template-columns: 1fr; } .hero-actions {display: none;width: 0;height: 0;opacity: 0;} }
 
   footer { text-align: center; padding: 2rem 1rem 2.5rem; font-size: 0.85rem; color: var(--muted); }
 
@@ -97,8 +97,8 @@
 <footer>© Asian Food Station • Fait maison • Halal</footer>
 
 <div class="floating">
-  <a href="tel:+33955690726">📞 Appeler</a>
-  <a href="javascript:openDirections()">📍 Itinéraire</a>
+  <a href="tel:+33955690726">Appeler</a>
+  <a href="javascript:openDirections()">Venir sur place</a>
 </div>
 
 <div class="lightbox" id="lightbox">
