@@ -1,579 +1,138 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Asian Food Station — Restaurant népalais à La Courneuve</title>
-  <meta name="description" content="Asian Food Station — Restaurant népalais à La Courneuve. Cuisine traditionnelle népalaise, sur place & à emporter. Momos, Dal Bhat, Thukpa, Sekuwa." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asian Food Station – Carte</title>
 
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Lightbox2 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --ocre: #c07a2f;
-      --deep-red: #b22222;
-      --dark: #1f1f1f;
-      --muted: #6b6b6b;
-      --card-radius: 14px;
-      --max-width: 1200px;
+      --bg: #ffffff;
+      --text: #b73400;
+      --muted: #bd5200;
+      --accent: #e63946;
+      --overlay: rgba(255, 255, 255, 0.45);
     }
 
-    /* base */
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: var(--dark);
-      background: linear-gradient(180deg, #f7f3ee 0%, #f3efe8 100%);
-      -webkit-font-smoothing:antialiased;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
 
-    /* Header / Hero */
-    .hero {
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      background: url('./banner.jpg') center/cover no-repeat;
-      color: #fff;
-    }
-    /* warm textured overlay */
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(180deg, rgba(8,6,5,0.45), rgba(8,6,5,0.25)),
-        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 20%),
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 10px);
-      backdrop-filter: blur(1px);
-    }
-    .hero .hero-inner {
-      position: relative;
-      z-index: 5;
-      text-align: center;
-      padding: 40px;
-      max-width: var(--max-width);
-    }
-    .logo-hero {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 110px;
-      border-radius: 12px;
-      z-index: 6;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4.5vw, 4rem);
-      line-height: 1.02;
-      margin: 0 0 10px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #fff;
-      text-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    }
-    .hero p.lead {
-      color: #fff;
-      font-size: clamp(1rem, 1.2vw, 1.1rem);
-      margin-bottom: 20px;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.35);
-    }
-    .hero .btns .btn {
-      border-radius: 999px;
-      padding: 12px 26px;
-      font-weight: 700;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
-    }
+    .hero { position: relative; background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.6), rgba(255, 255, 255)), url('./Asian_Food_Station_rest_virubhai_menu_1.jpg') center/cover no-repeat; padding: 4rem 1.25rem 3rem; text-align: center; color: #000000; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: var(--overlay); }
+    .hero-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+    .hero-inner.fade-in { opacity: 1; transform: translateY(0); }
+    .hero img.logo { width: 120px; margin-bottom: 0.5rem; }
+    .hero h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.05em;color: #000000; }
+    .tagline { font-size: 0.8rem; color: #000000; margin-bottom: 0.5rem; }
 
-    /* navbar */
-    .navbar-light .navbar-nav .nav-link {
-      color: rgba(255,255,255,0.95);
-      font-weight: 600;
-      margin-right: 6px;
-    }
-    .navbar-sticky {
-      position: sticky;
-      top: 0;
-      z-index: 1050;
-      transition: background-color .25s ease, box-shadow .25s ease;
-      background: #ff6200;
-    }
-    .navbar-scrolled {
-      background: #fff !important;
-      box-shadow: 0 6px 20px rgba(32,32,32,0.08);
-    }
-    .navbar-scrolled .nav-link { color: var(--dark) !important; }
-    .navbar-scrolled .navbar-brand { color: var(--dark) !important; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+    .map-btn, .call-btn { background: var(--accent); color: #fff; border: none; padding: 0.85rem 1.75rem; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 1rem; text-decoration: none; box-shadow: 0 15px 30px rgba(230,57,70,0.35); transition: transform 0.3s ease; }
+    .map-btn:hover, .call-btn:hover { transform: translateY(-2px); opacity: 0.9; }
 
-    /* container section */
-    .container-section {
-      padding: 70px 20px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
+    .hours { font-size: 0.95rem; color: #232323; text-align: center; line-height: 1.4; margin-top: 0.5rem; }
+    .reviews { display: inline-block; margin-top: 0.25rem; font-size: 0.95rem; color: var(--accent); text-decoration: none; font-weight: 600; }
+    .reviews .stars { color: gold; margin-left: 0.25rem; }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-      color: var(--deep-red);
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      letter-spacing: -0.01em;
-    }
+    .badges { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+    .badges img { height: 38px; }
 
-    /* Menu cards (with images) */
-    .menu-grid {
-      display: grid;
-      gap: 22px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .menu-card {
-      background: #fff;
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      box-shadow: 0 8px 28px rgba(15,15,15,0.06);
-      display: flex;
-      flex-direction: column;
-      transition: transform .25s ease, box-shadow .25s ease;
-      height: 100%;
-    }
-    .menu-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(10,10,10,0.09); }
-    .menu-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-    .menu-card .card-body {
-      padding: 18px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .menu-card h5 { margin: 0 0 8px; color: var(--deep-red); font-weight: 700; }
-    .menu-card p { margin: 0 0 12px; color: var(--muted); }
-    .price-tag {
-      font-weight: 700;
-      color: var(--dark);
-    }
+    /* MENU */
+    .menu { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(2, 1fr); }
+    .menu img { width: 100%; display: block; cursor: pointer; }
+    @media (max-width: 768px) { .menu { grid-template-columns: 1fr; } }
 
-    /* Gallery (thumbnails) */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      align-items: center;
-    }
-    .gallery-grid a img {
-      width: 100%;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 10px;
-      display: block;
-      transition: transform .25s ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-    .gallery-grid a img:hover { transform: scale(1.03); }
+    /* LIGHTBOX */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 999; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 95vw; max-height: 90vh; border-radius: 0.75rem; }
+    .lightbox span { position: absolute; top: 1rem; right: 1.25rem; font-size: 2rem; color: #fff; cursor: pointer; }
 
-    /* Reviews carousel */
-    .review-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 8px 30px rgba(10,10,10,0.06);
-      border-left: 6px solid var(--ocre);
-      font-style: italic;
-    }
-    .review-author {
-      margin-top: 12px;
-      text-align: right;
-      font-weight: 700;
-      color: var(--dark);
-      font-style: normal;
-    }
+    footer { text-align: center; padding: 2rem 1rem 2.5rem; font-size: 0.85rem; color: var(--muted); }
 
-    /* contact / map */
-    .contact-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 8px 28px rgba(10,10,10,0.06);
-    }
-
-    /* footer */
-    footer {
-      background: linear-gradient(180deg, #0d0d0d, #0a0a0a);
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    /* small utilities */
-    .badge-ocre {
-      background: linear-gradient(90deg, var(--ocre), var(--deep-red));
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      display: inline-block;
-    }
-
-    /* back to top */
-    #backTop {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 9999;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--deep-red);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.25);
-      cursor: pointer;
-      display: none;
-    }
-
-    /* responsiveness tweaks */
-    @media (max-width: 576px) {
-      .hero { min-height: 70vh; padding: 40px 10px; }
-      .menu-card img { height: 150px; }
-      .gallery-grid a img { height: 90px; }
-    }
-
+    /* Floating buttons */
+    .floating { position: fixed; bottom: 1rem; right: 1rem; display: flex; flex-direction: column; gap: 0.6rem; z-index: 1000; }
+    .floating a { background: var(--accent); color: #fff; padding: 0.75rem 1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; text-decoration: none; box-shadow: 0 10px 25px rgba(230,57,70,0.35); text-align: center; }
+    @media (min-width: 769px) { .floating { display: none; } }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light navbar-sticky">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-white" href="#accueil">Asian Food Station</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navCollapse">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link text-white" href="#menu">Carte</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#gallery">Galerie</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#reviews">Avis</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header id="accueil" class="hero">
-    <img src="./logo.png" alt="Logo Asian Food Station" class="logo-hero">
-    <div class="hero-inner">
-      <div class="badge-ocre mb-3">Restaurant népalais — La Courneuve</div>
+  <section class="hero">
+    <div class="hero-inner" id="heroInner">
+      <img src="./logo.png" alt="Asian Food Station" class="logo" />
       <h1>Asian Food Station</h1>
-      <p class="lead">Cuisine traditionnelle népalaise — Sur place & à emporter · Pas de buffet</p>
-      <div class="btns d-flex justify-content-center gap-3">
-        <a href="#menu" class="btn btn-lg text-white" style="background: linear-gradient(90deg,var(--ocre),var(--deep-red));">Voir la carte</a>
-        <a href="tel:0955690726" class="btn btn-outline-light btn-lg">Réserver / Appeler</a>
+      <p class="tagline">Spécialités népalaises et indiennes. Idéal pour fêtes, réunions et moments en famille ou entre amis.</p>
+      <div class="hero-actions">
+        <button class="map-btn" onclick="openDirections()">Venir</button>
+        <a class="call-btn" href="tel:+33955690726">+33 9 55 69 07 26</a>
       </div>
-    </div>
-  </header>
 
-  <!-- MENU -->
-  <section id="menu" class="container-section">
-    <div class="container">
-      <h2 class="section-title">Notre carte — spécialités népalaises</h2>
+      <div class="hours">
+        ⏰ <strong>Horaires :</strong> 13h – 23h<br>
+        ❌ <strong>Mercredi :</strong> Fermé
+      </div>
 
-      <div class="menu-grid">
+      <a class="reviews" href="https://g.page/r/CaqqB4tG8y_7EAE/review" target="_blank">
+        ⭐ Donner nous votre avis
+      </a>
 
-        <!-- Each card uses an image placeholder: replace with your files -->
-        <article class="menu-card">
-          <img loading="lazy" src="./images/dishes/momos.jpg" alt="Momos au poulet — Asian Food Station">
-          <div class="card-body">
-            <div>
-              <h5>Momos au poulet</h5>
-              <p>Raviolis népalais faits maison, farce savoureuse, servis avec une sauce tomate épicée maison.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <div class="price-tag">8,50€</div>
-              <a href="tel:0955690726" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Commander</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img loading="lazy" src="./images/dishes/dalbhat.jpg" alt="Dal Bhat — Asian Food Station">
-          <div class="card-body">
-            <div>
-              <h5>Dal Bhat</h5>
-              <p>Plat traditionnel : riz, lentilles (dal), curry de légumes, accompagnements épicés.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <div class="price-tag">12,50€</div>
-              <a href="#" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Commander</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img loading="lazy" src="./images/dishes/thukpa.jpg" alt="Thukpa — Asian Food Station">
-          <div class="card-body">
-            <div>
-              <h5>Thukpa</h5>
-              <p>Soupe de nouilles épicée, légumes et choix poulet/veggie — réconfortante.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <div class="price-tag">9,00€</div>
-              <a href="#" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Commander</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img loading="lazy" src="./images/dishes/sukati.jpg" alt="Sukuti — Asian Food Station">
-          <div class="card-body">
-            <div>
-              <h5>Sukuti</h5>
-              <p>Bœuf séché grillé, mariné aux épices népalaises — saveurs intenses.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <div class="price-tag">11,50€</div>
-              <a href="#" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Commander</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img loading="lazy" src="./images/dishes/poulet_curry.jpg" alt="Poulet curry népalais — Asian Food Station">
-          <div class="card-body">
-            <div>
-              <h5>Poulet curry népalais</h5>
-              <p>Morçeaux tendres mijotés dans une sauce parfumée aux épices traditionnelles.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <div class="price-tag">11,00€</div>
-              <a href="#" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Commander</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img loading="lazy" src="./images/dishes/sekuwa.jpg" alt="Sekuwa — Asian Food Station">
-          <div class="card-body">
-            <div>
-              <h5>Sekuwa</h5>
-              <p>Brochettes grillées (poulet ou agneau) — marinade traditionnelle & grill parfait.</p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <div class="price-tag">10,50€</div>
-              <a href="#" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Commander</a>
-            </div>
-          </div>
-        </article>
-
+      <div class="badges">
+        <img src="./faitmaison.png" alt="Fait maison" />
+        <img src="./halal.png" alt="Halal" />
       </div>
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" class="container-section">
-    <div class="container">
-      <h2 class="section-title">Galerie — découvrez notre cuisine & notre ambiance</h2>
+  <main class="menu">
+    <img src="./Asian_Food_Station_rest_virubhai_menu_1.jpg" loading="lazy">
+    <img src="./Asian_Food_Station_rest_virubhai_menu_2.jpg" loading="lazy">
+    <img src="./Asian_Food_Station_rest_virubhai_menu_3.jpg" loading="lazy">
+    <img src="./Asian_Food_Station_rest_virubhai_menu_4.jpg" loading="lazy">
+    <img src="./Asian_Food_Station_rest_virubhai_menu_5.jpg" loading="lazy">
+    <img src="./Asian_Food_Station_rest_virubhai_menu_6.jpg" loading="lazy">
+  </main>
 
-      <div class="gallery-grid">
-        <!-- Thumbnails link to larger images. Lightbox2 uses data-lightbox attribute -->
-        <a href="./images/gallery/1.jpg" data-lightbox="afs-gallery" data-title="Momos faits maison">
-          <img loading="lazy" src="./images/gallery/thumbs/1.jpg" alt="Momos — Asian Food Station">
-        </a>
-        <a href="./images/gallery/2.jpg" data-lightbox="afs-gallery" data-title="Dal Bhat traditionnel">
-          <img loading="lazy" src="./images/gallery/thumbs/2.jpg" alt="Dal Bhat — Asian Food Station">
-        </a>
-        <a href="./images/gallery/3.jpg" data-lightbox="afs-gallery" data-title="Thukpa chaud">
-          <img loading="lazy" src="./images/gallery/thumbs/3.jpg" alt="Thukpa — Asian Food Station">
-        </a>
-        <a href="./images/gallery/4.jpg" data-lightbox="afs-gallery" data-title="Sekuwa grillé">
-          <img loading="lazy" src="./images/gallery/thumbs/4.jpg" alt="Sekuwa — Asian Food Station">
-        </a>
-        <a href="./images/gallery/5.jpg" data-lightbox="afs-gallery" data-title="Intérieur du restaurant">
-          <img loading="lazy" src="./images/gallery/thumbs/5.jpg" alt="Intérieur — Asian Food Station">
-        </a>
-        <a href="./images/gallery/6.jpg" data-lightbox="afs-gallery" data-title="Ambiance chaleureuse">
-          <img loading="lazy" src="./images/gallery/thumbs/6.jpg" alt="Ambiance — Asian Food Station">
-        </a>
-      </div>
-    </div>
-  </section>
+  <footer>© Asian Food Station • Fait maison • Halal</footer>
 
-  <!-- REVIEWS -->
-  <section id="reviews" class="container-section">
-    <div class="container">
-      <h2 class="section-title">Ils parlent de nous</h2>
-
-      <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-
-          <div class="carousel-item active">
-            <div class="review-card mx-auto" style="max-width:900px;">
-              « Un véritable voyage culinaire au Népal — momos faits maison, service chaleureux et portions généreuses. »
-              <div class="review-author">— Sophie L., cliente</div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="review-card mx-auto" style="max-width:900px;">
-              « Meilleur restaurant népalais du coin : ambiance, goût et rapport qualité/prix. À recommander ! »
-              <div class="review-author">— Ahmed R.</div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="review-card mx-auto" style="max-width:900px;">
-              « Cuisine authentique, accueil chaleureux — parfait pour emporter ou dîner sur place. »
-              <div class="review-author">— Julie T.</div>
-            </div>
-          </div>
-
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-          <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-          <span class="visually-hidden">Suivant</span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="container-section">
-    <div class="container">
-      <h2 class="section-title">Contact & Informations pratiques</h2>
-
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <div class="contact-card">
-            <h5 class="mb-3" style="color:var(--deep-red);">Asian Food Station</h5>
-            <p class="mb-1"><strong>Adresse :</strong><br>Galerie GM4 (1er étage), 51 Av. Paul Vaillant Couturier, 93120 La Courneuve</p>
-            <p class="mb-1"><strong>Téléphone :</strong> <a href="tel:0955690726" style="color:var(--deep-red);font-weight:700;">09 55 69 07 26</a></p>
-            <p class="mb-1"><strong>Sur place & à emporter</strong> — Pas de buffet</p>
-            <p class="mb-2"><strong>Réseaux :</strong>
-              <a href="https://www.facebook.com/afsrestoLacourneuve/" target="_blank" rel="noopener" style="color:var(--deep-red)">Facebook</a> |
-              <a href="https://www.tiktok.com/@afs.afs4" target="_blank" rel="noopener" style="color:var(--deep-red)">TikTok</a>
-            </p>
-
-            <div class="mt-3">
-              <a href="tel:0955690726" class="btn btn-sm" style="background:var(--deep-red);color:#fff;border-radius:999px;">Appeler</a>
-              <a href="#gallery" class="btn btn-sm btn-outline-secondary ms-2">Voir la galerie</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="contact-card">
-            <h6 style="color:var(--deep-red);">Nous trouver</h6>
-            <!-- Google Maps embed; center on address. Replace the src with your own embedded map if desired -->
-            <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);">
-              <iframe title="Asian Food Station - map"
-                      src="https://www.google.com/maps?q=51+Av.+Paul+Vaillant+Couturier,+La+Courneuve&output=embed"
-                      width="100%" height="320" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <p class="mt-2" style="font-size:0.95rem;color:var(--muted);">1er étage, Galerie GM4 — accessible depuis l'avenue.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6 text-md-start mb-3 mb-md-0">
-          <strong>Asian Food Station</strong> — Galerie GM4, 51 Av. Paul Vaillant Couturier, 93120 La Courneuve
-        </div>
-        <div class="col-md-6 text-md-end">
-          <small>© <span id="year"></span> Asian Food Station — Tous droits réservés</small>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- BACK TO TOP -->
-  <div id="backTop" title="Haut">
-    ↑
+  <div class="floating">
+    <a href="tel:+33123456789">📞 Appeler</a>
+    <a href="javascript:openDirections()">📍 Itinéraire</a>
   </div>
 
-  <!-- SCRIPTS -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <div class="lightbox" id="lightbox">
+    <span id="close">×</span>
+    <img id="lightbox-img">
+  </div>
 
   <script>
-    // set year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // navbar color change on scroll
-    (function(){
-      var $nav = $('.navbar-sticky');
-      function onScroll(){
-        if(window.scrollY > 50){
-          $nav.addClass('navbar-scrolled');
-          $('.navbar-brand').removeClass('text-white');
-        } else {
-          $nav.removeClass('navbar-scrolled');
-          $('.navbar-brand').addClass('text-white');
-        }
-      }
-      onScroll();
-      window.addEventListener('scroll', onScroll);
-    })();
-
-    // Back to top
-    (function(){
-      var btn = $('#backTop');
-      $(window).on('scroll', function(){
-        if($(window).scrollTop() > 400) btn.fadeIn();
-        else btn.fadeOut();
-      });
-      btn.on('click', function(){ $('html,body').animate({scrollTop:0}, 500); });
-    })();
-
-    // Lightbox options (optional)
-    lightbox.option({
-      'resizeDuration': 200,
-      'wrapAround': true,
-      'alwaysShowNavOnTouchDevices': true
+    window.addEventListener('DOMContentLoaded', () => {
+      const hero = document.getElementById('heroInner');
+      setTimeout(() => { hero.classList.add('fade-in'); }, 300);
     });
 
-    // Smooth scroll for nav links (for older browsers)
-    $('a.nav-link, a[href^="#"]').on('click', function(e){
-      var href = $(this).attr('href');
-      if(href && href.startsWith('#')){
-        e.preventDefault();
-        var top = $(href).offset() ? $(href).offset().top - 70 : 0;
-        $('html,body').animate({scrollTop: top}, 600);
-        // close navbar on mobile
-        $('.navbar-collapse').collapse('hide');
+    function openDirections() {
+      const address = encodeURIComponent('Asian Food Station');
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      if (/iPad|iPhone|iPod/.test(ua)) {
+        window.open(`maps://maps.apple.com/?q=${address}`);
+      } else if (/Android/.test(ua)) {
+        window.open(`geo:0,0?q=${address}`);
+      } else {
+        window.open(`https://www.google.com/maps/search/?api=1&query=${address}`);
       }
-    });
+    }
+
+    const imgs = document.querySelectorAll('.menu img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close');
+
+    imgs.forEach(img => { img.addEventListener('click', () => { lightboxImg.src = img.src; lightbox.classList.add('active'); }); });
+    closeBtn.onclick = () => lightbox.classList.remove('active');
+    lightbox.onclick = e => e.target === lightbox && lightbox.classList.remove('active');
   </script>
+
 </body>
 </html>
