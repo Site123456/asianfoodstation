@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Asian Food Station – Carte</title>
-
+<title>Asian Food Station - Menu</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <style>
@@ -19,11 +18,11 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
 
-  .hero { position: relative; background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.6), rgba(255, 255, 255)), url('./Asian_Food_Station_rest_virubhai_menu_1.jpg') center/cover no-repeat; padding: 4rem 1.25rem 3rem; text-align: center; color: #000000; }
+  .hero { position: relative; background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.6), rgba(255, 255, 255)), url('./Asian_Food_Station_rest_virubhai_menu_1.jpg') center/cover no-repeat; padding: 3rem 1.25rem 2rem; text-align: center; color: #000000; }
   .hero::before { content: ''; position: absolute; inset: 0; background: var(--overlay); }
   .hero-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
   .hero-inner.fade-in { opacity: 1; transform: translateY(0); }
-  .hero img.logo { width: 120px; margin-bottom: 0.5rem; }
+  .hero img.logo { width: 120px; margin-bottom: 0.5rem;border-radius: 50%; }
   .hero h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.05em;color: #000000; }
   .tagline { font-size: 0.8rem; color: #000000; margin-bottom: 0.5rem; }
 
@@ -137,4 +136,3 @@ lightbox.onclick = e => e.target === lightbox && lightbox.classList.remove('acti
 
 </body>
 </html>
-
